@@ -22,7 +22,9 @@ public class EmailService {
         Content content = new Content("text/plain", "Bienvenido a nuestra aplicacion " + user + ".\nMabMab^^ - Miguel Berrio");
         Mail mail = new Mail(from, subject, to, content);
 
-        SendGrid sg = new SendGrid("${TOKEN_SENDGRID:}");
+        Dotenv dotenv = Dotenv.load();
+
+        SendGrid sg = new SendGrid(dotenv.get("${TOKEN_SENDGRID}"));
         Request request = new Request();
         try {
             request.setMethod(Method.POST);
