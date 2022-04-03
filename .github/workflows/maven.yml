@@ -22,6 +22,14 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
+    - name: Start MySQL
+      uses: samin/mysql-action@v1.3
+      with:
+          mysql database: springboot
+    # MYSQL_USER - create the specified user with superuser power for created database
+          mysql user: root
+    # MYSQL_PASSWORD - specified superuser password which user is power for created database
+          mysql password: toor
     - name: Build with Maven
       run: mvn -B package --file pom.xml
       env:
