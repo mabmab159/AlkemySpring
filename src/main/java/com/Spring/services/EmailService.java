@@ -7,6 +7,7 @@ import com.sendgrid.SendGrid;
 import com.sendgrid.helpers.mail.Mail;
 import com.sendgrid.helpers.mail.objects.Content;
 import com.sendgrid.helpers.mail.objects.Email;
+import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -20,8 +21,9 @@ public class EmailService {
         Email to = new Email(email);
         Content content = new Content("text/plain", "Bienvenido a nuestra aplicacion " + user + ".\nMabMab^^ - Miguel Berrio");
         Mail mail = new Mail(from, subject, to, content);
+        Dotenv dotenv = Dotenv.load();
 
-        SendGrid sg = new SendGrid(${{TOKEN_SENDGRID}});
+        SendGrid sg = new SendGrid(dotenv.get("TOKEN_SENDGRID"));
         Request request = new Request();
         try {
             request.setMethod(Method.POST);
