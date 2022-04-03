@@ -22,6 +22,14 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
+    - name: Azure MYSQL Deploy
+      uses: Azure/mysql@v1
+      with:
+    # Azure MySQL Server username for login
+        username: root
+    # Azure MySQL Server password for login
+    # Azure MySQL Server database (optional) to connect to. No database will be used automatically.
+        database: springboot
     - name: Build with Maven
       run: mvn -B package --file pom.xml
       env:
